@@ -1,0 +1,4 @@
+res://main_scene.tscn
+res://CardController_script.gd
+res://Scripts/Cards/CardController_Script.gd
+res://Scripts/Cards/EnemyCardsController_Script.gd

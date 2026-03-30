@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://cq58ty4uatjvv"]
+
+[ext_resource type="Texture2D" uid="uid://backhm4mlixux" path="res://Sprites/bg/Background.PNG" id="1_0f027"]
+[ext_resource type="Texture2D" uid="uid://dqq7lrhsvyeha" path="res://Sprites/bg/table.PNG" id="2_2c62f"]
+[ext_resource type="Texture2D" uid="uid://dnw58hcr031ij" path="res://Sprites/bratishnik/blinking_bratishkin1.PNG" id="3_8mm7a"]
+[ext_resource type="Texture2D" uid="uid://d38gdbwbdfv35" path="res://Sprites/bratishnik/blinking_bratishkin2.PNG" id="4_hq1ik"]
+[ext_resource type="Texture2D" uid="uid://bqk5qp58p5gxc" path="res://Sprites/bratishnik/blinking_bratishkin3.PNG" id="5_nfk4m"]
+[ext_resource type="Script" uid="uid://dfvhqt6qnuywf" path="res://Scripts/blink_script.gd" id="6_hq1ik"]
+[ext_resource type="Script" uid="uid://b2515s7uf8sqy" path="res://Scripts/Cards/CardController_Script.gd" id="7_671wp"]
+[ext_resource type="Texture2D" uid="uid://m2xpgqm2fc5l" path="res://Sprites/Buttons/card_deck.PNG" id="8_7ycvg"]
+[ext_resource type="Texture2D" uid="uid://cy12i1xefqscf" path="res://Sprites/bratishnik/IMG_1828.PNG" id="10_qwutr"]
+[ext_resource type="Script" uid="uid://ci2gwmpupj34y" path="res://Scripts/CardsDeckButton.gd" id="10_wr18j"]
+[ext_resource type="Script" uid="uid://40vfowku2xup" path="res://Scripts/LogLabel_Script.gd" id="11_qwutr"]
+[ext_resource type="Script" uid="uid://imnpr0epogpf" path="res://Scripts/Cards/EnemyCardsController_Script.gd" id="13_mo76n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66tet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8mm7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hq1ik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nfk4m")
+}],
+"loop": false,
+"name": &"blinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8mm7a")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="main_scene" type="Node2D" unique_id=474606885]
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1293303914]
+position = Vector2(960, 540)
+texture = ExtResource("1_0f027")
+metadata/_edit_lock_ = true
+
+[node name="Table" type="Sprite2D" parent="BG" unique_id=583590724]
+texture = ExtResource("2_2c62f")
+metadata/_edit_lock_ = true
+
+[node name="Enemy" type="AnimatedSprite2D" parent="BG/Table" unique_id=448947039]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_66tet")
+animation = &"blinking"
+speed_scale = 1.5
+script = ExtResource("6_hq1ik")
+metadata/_edit_lock_ = true
+
+[node name="CardsContainer" type="ScrollContainer" parent="." unique_id=711291504]
+clip_children = 2
+clip_contents = false
+offset_top = 672.0
+offset_right = 1920.0
+offset_bottom = 1072.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+follow_focus = true
+draw_focus_border = true
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+scroll_hint_mode = 1
+tile_scroll_hint = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardsContainer" unique_id=1304189740]
+clip_contents = true
+custom_minimum_size = Vector2(199, 300)
+layout_mode = 2
+accessibility_name = "HBoxContainer"
+
+[node name="Enemy Card Control" type="Node" parent="." unique_id=1321705652]
+script = ExtResource("7_671wp")
+
+[node name="Give card button" type="TextureButton" parent="." unique_id=1172749135]
+offset_left = 1680.517
+offset_top = 525.0
+offset_right = 2494.8494
+offset_bottom = 1316.8312
+scale = Vector2(0.32177934, 0.32177934)
+tooltip_text = "Взять карту"
+button_mask = 3
+texture_normal = ExtResource("8_7ycvg")
+stretch_mode = 3
+script = ExtResource("10_wr18j")
+
+[node name="EnemyHand" type="Sprite2D" parent="." unique_id=653452926]
+z_index = 1
+position = Vector2(1140, 407.00003)
+scale = Vector2(0.40235043, 0.40235043)
+texture = ExtResource("10_qwutr")
+metadata/_edit_lock_ = true
+
+[node name="Log label" type="RichTextLabel" parent="." unique_id=1853354070]
+offset_left = 22.0
+offset_top = 25.0
+offset_right = 468.0
+offset_bottom = 210.0
+script = ExtResource("11_qwutr")
+
+[node name="EnemyCardsContainer" type="Control" parent="." unique_id=2130740600]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1116.0
+offset_top = 376.0
+offset_right = 1336.0
+offset_bottom = 570.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_mo76n")
+spacing_x = 9.0
+
+[connection signal="button_down" from="Give card button" to="Give card button" method="_on_button_down"]
