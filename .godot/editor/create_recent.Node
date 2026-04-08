@@ -1,12 +1,14 @@
+Node
+ColorRect
+Panel
+Label
 Control
 TextureRect
+CanvasLayer
 Container
 HBoxContainer
 TextureButton
 Sprite2D
-Node
 Button
 CenterContainer
 HScrollBar
-ScrollContainer
-AnimatedSprite2D

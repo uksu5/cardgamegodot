@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dwp8c2dv63nw8"]
+
+[ext_resource type="Texture2D" uid="uid://dcdbbny1d60jj" path="res://Sprites/banners/win_banner.PNG" id="1_ekb8w"]
+
+[node name="Control" type="Control" unique_id=1706940044]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953474717]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1302544628]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(48.06748, 27.093596)
+color = Color(0, 0, 0, 0.42745098)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1816457500]
+offset_left = 448.99997
+offset_top = 89.0
+offset_right = 1755.0
+offset_bottom = 779.0
+scale = Vector2(0.7443923, 0.7443923)
+texture = ExtResource("1_ekb8w")

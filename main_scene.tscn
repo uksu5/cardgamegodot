@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cq58ty4uatjvv"]
 
 [ext_resource type="Texture2D" uid="uid://backhm4mlixux" path="res://Sprites/bg/Background.PNG" id="1_0f027"]
+[ext_resource type="Script" uid="uid://crb42a1chb025" path="res://main_scene.gd" id="1_mo76n"]
 [ext_resource type="Texture2D" uid="uid://dqq7lrhsvyeha" path="res://Sprites/bg/table.PNG" id="2_2c62f"]
 [ext_resource type="Texture2D" uid="uid://dnw58hcr031ij" path="res://Sprites/bratishnik/blinking_bratishkin1.PNG" id="3_8mm7a"]
 [ext_resource type="Texture2D" uid="uid://d38gdbwbdfv35" path="res://Sprites/bratishnik/blinking_bratishkin2.PNG" id="4_hq1ik"]
@@ -10,8 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://m2xpgqm2fc5l" path="res://Sprites/Buttons/card_deck.PNG" id="8_7ycvg"]
 [ext_resource type="Texture2D" uid="uid://cy12i1xefqscf" path="res://Sprites/bratishnik/IMG_1828.PNG" id="10_qwutr"]
 [ext_resource type="Script" uid="uid://ci2gwmpupj34y" path="res://Scripts/CardsDeckButton.gd" id="10_wr18j"]
+[ext_resource type="Texture2D" uid="uid://dk7lc805urhjp" path="res://Sprites/Buttons/Stand_Button.PNG" id="11_42l1d"]
 [ext_resource type="Script" uid="uid://40vfowku2xup" path="res://Scripts/LogLabel_Script.gd" id="11_qwutr"]
+[ext_resource type="Script" uid="uid://bh1767cbwd4pn" path="res://stand_button_script.gd" id="12_2jcla"]
 [ext_resource type="Script" uid="uid://imnpr0epogpf" path="res://Scripts/Cards/EnemyCardsController_Script.gd" id="13_mo76n"]
+[ext_resource type="Script" uid="uid://chvsmephhss8r" path="res://DeckButtonsScript.gd" id="13_u0ygc"]
+[ext_resource type="Script" uid="uid://de854o1rr2xnr" path="res://turn_banner_script.gd" id="16_m35m6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_66tet"]
 animations = [{
@@ -38,7 +43,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_m35m6"]
+font_size = 33
+shadow_size = 5
+shadow_offset = Vector2(1.22, 1)
+
 [node name="main_scene" type="Node2D" unique_id=474606885]
+script = ExtResource("1_mo76n")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=1293303914]
 position = Vector2(960, 540)
@@ -79,20 +90,8 @@ custom_minimum_size = Vector2(199, 300)
 layout_mode = 2
 accessibility_name = "HBoxContainer"
 
-[node name="Enemy Card Control" type="Node" parent="." unique_id=1321705652]
+[node name="CardController" type="Node" parent="." unique_id=1321705652]
 script = ExtResource("7_671wp")
-
-[node name="Give card button" type="TextureButton" parent="." unique_id=1172749135]
-offset_left = 1680.517
-offset_top = 525.0
-offset_right = 2494.8494
-offset_bottom = 1316.8312
-scale = Vector2(0.32177934, 0.32177934)
-tooltip_text = "Взять карту"
-button_mask = 3
-texture_normal = ExtResource("8_7ycvg")
-stretch_mode = 3
-script = ExtResource("10_wr18j")
 
 [node name="EnemyHand" type="Sprite2D" parent="." unique_id=653452926]
 z_index = 1
@@ -120,4 +119,63 @@ grow_vertical = 2
 script = ExtResource("13_mo76n")
 spacing_x = 9.0
 
-[connection signal="button_down" from="Give card button" to="Give card button" method="_on_button_down"]
+[node name="Turn Banner" type="Control" parent="." unique_id=53663337]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("16_m35m6")
+transparency = 0.4
+interval = 0.2
+
+[node name="Black Transparent Line" type="ColorRect" parent="Turn Banner" unique_id=1570797696]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1919.0
+offset_bottom = 59.0
+color = Color(0, 0, 0, 0.7137255)
+
+[node name="Turn Label" type="Label" parent="Turn Banner" unique_id=106157162]
+layout_mode = 0
+offset_left = 794.0
+offset_top = 5.0
+offset_right = 1147.0
+offset_bottom = 51.0
+text = "Ход игрока"
+label_settings = SubResource("LabelSettings_m35m6")
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Deck Buttons" type="Node" parent="." unique_id=2105797692]
+script = ExtResource("13_u0ygc")
+
+[node name="CardsDeckButton" type="TextureButton" parent="Deck Buttons" unique_id=1172749135]
+offset_left = 1650.0001
+offset_top = 430.00006
+offset_right = 2930.662
+offset_bottom = 1594.7576
+rotation = 0.2364846
+scale = Vector2(0.2787876, 0.2787876)
+tooltip_text = "Взять карту"
+button_mask = 3
+texture_normal = ExtResource("8_7ycvg")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("10_wr18j")
+
+[node name="Stand button" type="TextureButton" parent="Deck Buttons" unique_id=535769381]
+offset_left = 1845.0
+offset_top = 645.0
+offset_right = 2116.8472
+offset_bottom = 916.84686
+scale = Vector2(0.2787876, 0.2787876)
+tooltip_text = "Взять карту"
+button_mask = 3
+texture_normal = ExtResource("11_42l1d")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("12_2jcla")
+
+[connection signal="button_down" from="Deck Buttons/CardsDeckButton" to="Deck Buttons/CardsDeckButton" method="_on_button_down"]
+[connection signal="button_down" from="Deck Buttons/Stand button" to="Deck Buttons/Stand button" method="_on_button_down"]

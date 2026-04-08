@@ -7,8 +7,9 @@ var cards_suit = BaseCards.CARDS_SUITS
 var cards_deck = BaseCards.CARDS_DECK52.duplicate()
 @onready var logging_box = $"../Log label"
 @onready var hbox_container = $"../CardsContainer/HBoxContainer"
-@onready var give_card_button_script = $"../Give card button"
+@onready var give_card_button_script = $"../Deck Buttons/CardsDeckButton"
 @onready var enemy_cards_container = $"../EnemyCardsContainer"
+@onready var turn_banner = $"../Turn Banner"
 
 var enemy_cards:= []
 var enemy_score := 0
@@ -18,6 +19,20 @@ var player_cards = []
 
 enum Actions {HIT, STAND}
 enum Turn {PLAYER, ENEMY}
+
+var last_player_action = ""
+var last_enemy_action = ""
+
+var current_turn = ""
+
+func _process(delta):
+	if player_score == 21 and enemy_score != 21:
+		print("победа игрока")
+	elif player_score and enemy_score == 21:
+		print("ничья")
+	elif enemy_score == 21 and player_score != 21:
+		print("победа врага")
+	
 
 func _ready():
 	cards_deck.shuffle()
@@ -32,7 +47,8 @@ func choose_turn():
 		Turn.PLAYER: player_turn()
 
 func enemy_turn():
-	
+	current_turn = "enemy"
+	turn_banner.fade_in_out("enemy")
 	if len(enemy_cards) == 0:
 		take_card_enemy()
 		return
@@ -98,6 +114,8 @@ func simulate_game(starting_action):
 	return sim_enemy_score > sim_player_score
 			
 func player_turn():
+	current_turn = "player"
+	turn_banner.fade_in_out("player")
 	logging_box.add_log("Ход игрока")
 	
 # ШТУЧКИ
@@ -112,10 +130,12 @@ func take_card_enemy():
 	enemy_score = get_score(enemy_cards)
 	logging_box.add_log("Карты врага: " + str(enemy_cards) + " | Счёт врага " + str(enemy_score))
 	add_enemy_card_on_screen()
-
-func stand_enemy():
+	last_enemy_action = "hit"
 	player_turn()
 
+func stand_enemy():
+	last_enemy_action = "stand"
+	player_turn()
 
 func take_card_player():
 	if cards_deck:		
@@ -125,34 +145,18 @@ func take_card_player():
 		logging_box.add_log("Счёт: " + str(player_score) + " | Карты игрока: " + str(player_cards))
 		logging_box.add_log("карт в колоде: " + str(cards_deck))
 		add_card_on_screen(card)
+		last_player_action = "hit"
 		enemy_turn()
 	else:
 		print("колода пуста")
-		
-		
+
+func stand_player():
+	logging_box.add_log("Игрок пропустил ход")
+	last_player_action = "stand"
+	enemy_turn()
+
 func add_card_on_screen(card):
-	var card_sprite = TextureRect.new()
-	# загрузка текстуры
-	var tex_path = "res://sprites/cards/" + card + ".png"
-	card_sprite.texture = load(tex_path)
-
-	card_sprite.custom_minimum_size = Vector2(297, 497)
-	card_sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	card_sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-
-	# добавление во временного родителя для анимации
-	give_card_button_script.add_child(card_sprite)
-
-	card_sprite.global_position = Vector2(100, 500) 
-
-	var tween = create_tween()
-	tween.tween_property(card_sprite, "global_position", hbox_container.global_position, 0.5)\
-		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-
-	await tween.finished
-
-	give_card_button_script.remove_child(card_sprite)
-	hbox_container.add_child(card_sprite)
+	give_card_button_script.add_card_on_screen(card)
 
 func add_enemy_card_on_screen():
 	enemy_cards_container.add_enemy_card_on_screen()
