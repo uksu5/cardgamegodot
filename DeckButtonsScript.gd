@@ -7,14 +7,14 @@ func _ready() -> void:
 	for button in get_children():
 		button.material = mat
 
-func _process(delta: float):
-	if cards_controller.current_turn == "player":
+func _process(_delta: float) -> void:
+	if cards_controller.state == cards_controller.GameState.PLAYER_TURN:
 		disable_buttons(false)
 	else:
 		disable_buttons(true)
 		
 
-func disable_buttons(bool):
+func disable_buttons(bool) -> void:
 	for button in get_children():
 		button.disabled = bool
 		if bool:

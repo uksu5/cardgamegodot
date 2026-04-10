@@ -14,8 +14,6 @@ func _ready():
 	texture_click_mask = bitmap
 func _on_button_down():
 	CardController.take_card_player()
-
-
 func add_card_on_screen(card):
 	var card_sprite = TextureRect.new()
 	# загрузка текстуры

@@ -1,6 +1,6 @@
-res://DeckButtonsScript.gd
-res://Scripts/Cards/CardController_Script.gd
 res://main_scene.tscn
-res://Scripts/CardsDeckButton.gd
+res://shaders/fullscreen_overlay.gdshader
 res://shaders/grayscale.gdshader
-res://stand_button_script.gd
+res://Scripts/Cards/CardController_Script.gd
+res://EndScreenControlScript.gd
+res://main_scene.gd

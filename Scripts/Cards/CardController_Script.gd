@@ -5,11 +5,16 @@ var BaseCards = load("res://Scripts/Cards/base_cards.gd")
 var cards_rate = BaseCards.CARDS
 var cards_suit = BaseCards.CARDS_SUITS
 var cards_deck = BaseCards.CARDS_DECK52.duplicate()
+var end_screen = preload("res://EndScreen.tscn").instantiate()
 @onready var logging_box = $"../Log label"
 @onready var hbox_container = $"../CardsContainer/HBoxContainer"
 @onready var give_card_button_script = $"../Deck Buttons/CardsDeckButton"
 @onready var enemy_cards_container = $"../EnemyCardsContainer"
 @onready var turn_banner = $"../Turn Banner"
+
+
+
+var game_result := Results.UNDECIDED
 
 var enemy_cards:= []
 var enemy_score := 0
@@ -19,41 +24,36 @@ var player_cards = []
 
 enum Actions {HIT, STAND}
 enum Turn {PLAYER, ENEMY}
+enum GameState {PLAYER_TURN, ENEMY_TURN, GAME_OVER}
+enum Results {WIN, LOSS, DRAW, UNDECIDED}
 
-var last_player_action = ""
-var last_enemy_action = ""
+var state = GameState.PLAYER_TURN
 
-var current_turn = ""
-
-func _process(delta):
-	if player_score == 21 and enemy_score != 21:
-		print("победа игрока")
-	elif player_score and enemy_score == 21:
-		print("ничья")
-	elif enemy_score == 21 and player_score != 21:
-		print("победа врага")
+var last_player_action = Actions.HIT
+var last_enemy_action = Actions.HIT
 	
-
 func _ready():
+	game_result = Results.UNDECIDED
 	cards_deck.shuffle()
 	choose_turn()
 	
 func choose_turn():
 	# Случайный выбор хода(игрок/противник)
-	randomize()
 	turn = [Turn.PLAYER, Turn.ENEMY].pick_random()
 	match turn:
-		Turn.ENEMY: enemy_turn()
-		Turn.PLAYER: player_turn()
+		Turn.PLAYER:
+			state = GameState.PLAYER_TURN
+		Turn.ENEMY:
+			state = GameState.ENEMY_TURN
+	deferred_next_step()
 
 func enemy_turn():
-	current_turn = "enemy"
-	turn_banner.fade_in_out("enemy")
-	if len(enemy_cards) == 0:
+	state = GameState.ENEMY_TURN
+	if enemy_cards.is_empty():
 		take_card_enemy()
 		return
 	logging_box.add_log("Ход врага")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(randf_range(2.0, 7.0)).timeout
 	#запуск монте-карло
 	var decision = monte_carlo()
 	if decision == Actions.HIT:
@@ -114,8 +114,7 @@ func simulate_game(starting_action):
 	return sim_enemy_score > sim_player_score
 			
 func player_turn():
-	current_turn = "player"
-	turn_banner.fade_in_out("player")
+	state = GameState.PLAYER_TURN
 	logging_box.add_log("Ход игрока")
 	
 # ШТУЧКИ
@@ -130,12 +129,14 @@ func take_card_enemy():
 	enemy_score = get_score(enemy_cards)
 	logging_box.add_log("Карты врага: " + str(enemy_cards) + " | Счёт врага " + str(enemy_score))
 	add_enemy_card_on_screen()
-	last_enemy_action = "hit"
-	player_turn()
+	last_enemy_action = Actions.HIT
+	state = GameState.PLAYER_TURN
+	deferred_next_step()
 
 func stand_enemy():
-	last_enemy_action = "stand"
-	player_turn()
+	last_enemy_action = Actions.STAND
+	state = GameState.PLAYER_TURN
+	deferred_next_step()
 
 func take_card_player():
 	if cards_deck:		
@@ -145,18 +146,59 @@ func take_card_player():
 		logging_box.add_log("Счёт: " + str(player_score) + " | Карты игрока: " + str(player_cards))
 		logging_box.add_log("карт в колоде: " + str(cards_deck))
 		add_card_on_screen(card)
-		last_player_action = "hit"
-		enemy_turn()
+		last_player_action = Actions.HIT
+		state = GameState.ENEMY_TURN
+		deferred_next_step()
 	else:
 		print("колода пуста")
 
 func stand_player():
 	logging_box.add_log("Игрок пропустил ход")
-	last_player_action = "stand"
-	enemy_turn()
+	last_player_action = Actions.STAND
+	state = GameState.ENEMY_TURN
+	deferred_next_step()
 
 func add_card_on_screen(card):
 	give_card_button_script.add_card_on_screen(card)
 
 func add_enemy_card_on_screen():
 	enemy_cards_container.add_enemy_card_on_screen()
+
+func check_result():
+	if game_result == Results.UNDECIDED:
+		if player_score == 21 and enemy_score != 21:
+			game_result = Results.WIN
+		elif player_score == 21 and enemy_score == 21:
+			game_result = Results.DRAW
+		elif enemy_score == 21 and player_score != 21:
+			game_result = Results.LOSS
+		elif player_score > 21 and enemy_score < 21:
+			game_result = Results.LOSS
+		elif enemy_score > 21 and player_score < 21:
+			game_result = Results.LOSS
+		elif last_enemy_action == Actions.STAND and last_player_action == Actions.STAND:
+			if abs(player_score - 21) < abs(enemy_score - 21):
+				game_result = Results.WIN
+			else:
+				game_result = Results.LOSS
+	else:
+		state = GameState.GAME_OVER
+		next_step()	
+func next_step():
+	match state:
+		GameState.PLAYER_TURN:
+			turn_banner.fade_in_out("player")
+			check_result()
+			player_turn()
+		GameState.ENEMY_TURN:
+			turn_banner.fade_in_out("enemy")
+			check_result()
+			enemy_turn()
+		GameState.GAME_OVER:
+			game_end(game_result)
+
+func game_end(result):
+	end_screen.show_result(result)
+	get_parent().add_child(end_screen)
+func deferred_next_step():
+	call_deferred("next_step")

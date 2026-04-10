@@ -4,7 +4,7 @@ extends Control
 @export var interval := 1.0
 
 func fade_in_out(turn):
-# скрипт запустится только после готовности узла
+# скрипт запустится только после готовности ноды
 	if not is_node_ready():
 		await ready
 	match turn:
