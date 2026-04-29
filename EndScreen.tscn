@@ -7,9 +7,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmk8k"]
 shader = ExtResource("1_8dv01")
 shader_parameter/light_color = Color(4.34448, 4.8619895, 0.36941272, 1)
-shader_parameter/global_alpha = 0.1510000071725
+shader_parameter/global_alpha = 0.282000013395
 shader_parameter/base_glow = 0.4
-shader_parameter/ray_intensity = 1.03600004921
+shader_parameter/ray_intensity = 1.086000051585
 shader_parameter/ray_smoothness = 4.01200018731012
 shader_parameter/speed = 0.1250000059375
 shader_parameter/light_pos = Vector2(0.5, -0.2)

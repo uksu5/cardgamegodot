@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bi44thydwj2u5"]
+
+[ext_resource type="Script" uid="uid://8m5f06r2dubu" path="res://Scripts/ItemsData/item_ability.gd" id="1_wjmc1"]
+[ext_resource type="Script" uid="uid://cljonv8bskj1d" path="res://Scripts/ItemsData/item_data.gd" id="2_vbmvm"]
+[ext_resource type="Texture2D" uid="uid://cvqjon7ndduw7" path="res://Sprites/ItemsTextures/BratishkinBananaCharm.png" id="3_vbmvm"]
+
+[resource]
+script = ExtResource("2_vbmvm")
+id = "BratishkinBananaCharm"
+name = "Брелок Братишкин"
+author = "днед"
+rarity = 3
+texture = ExtResource("3_vbmvm")
+metadata/_custom_type_script = "uid://cljonv8bskj1d"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dki6aw5wshisg"]
+
+[ext_resource type="Script" uid="uid://8m5f06r2dubu" path="res://Scripts/ItemsData/item_ability.gd" id="1_re4kq"]
+[ext_resource type="Script" uid="uid://cljonv8bskj1d" path="res://Scripts/ItemsData/item_data.gd" id="2_cf23g"]
+[ext_resource type="Texture2D" uid="uid://b2fftg5gquhd7" path="res://Sprites/ItemsTextures/BratishkinStitchCharm.png" id="3_kkbb2"]
+
+[resource]
+script = ExtResource("2_cf23g")
+id = "BratishkinStitchCharm"
+name = "Брелок Братигкин и Ститч"
+author = "Милана DNK"
+rarity = 1
+texture = ExtResource("3_kkbb2")
+metadata/_custom_type_script = "uid://cljonv8bskj1d"

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ckkufcfswekbc"]
+
+[ext_resource type="Script" uid="uid://chhmjnnct6yma" path="res://Scripts/PrizeScreenScript.gd" id="1_8fkpf"]
+[ext_resource type="Texture2D" uid="uid://b2fftg5gquhd7" path="res://Sprites/ItemsTextures/BratishkinStitchCharm.png" id="2_a1gua"]
+
+[node name="Control" type="Control" unique_id=600793466 node_paths=PackedStringArray("ItemTexture", "ItemName", "ItemAuthor", "ItemRarity")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8fkpf")
+ItemTexture = NodePath("VBoxContainer/ItemTexture")
+ItemName = NodePath("VBoxContainer/ItemName")
+ItemAuthor = NodePath("VBoxContainer/ItemAuthor")
+ItemRarity = NodePath("VBoxContainer/ItemRarity")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=991164955]
+layout_mode = 0
+offset_right = 351.0
+offset_bottom = 424.0
+scale = Vector2(0.94349605, 0.99196655)
+color = Color(0.13, 0.13, 0.13, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1553896154]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 23.0
+offset_right = 319.0
+offset_bottom = 404.0
+
+[node name="ItemTexture" type="TextureRect" parent="VBoxContainer" unique_id=269027598]
+layout_mode = 2
+texture = ExtResource("2_a1gua")
+
+[node name="ItemName" type="Label" parent="VBoxContainer" unique_id=1387504577]
+layout_mode = 2
+text = "Название предмета"
+
+[node name="ItemAuthor" type="Label" parent="VBoxContainer" unique_id=576175212]
+layout_mode = 2
+text = "Автор"
+
+[node name="ItemRarity" type="Label" parent="VBoxContainer" unique_id=841643216]
+layout_mode = 2
+text = "Редкость"

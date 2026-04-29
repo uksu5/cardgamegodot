@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d2klxb8oc0g2n"]
+
+[ext_resource type="Script" uid="uid://8m5f06r2dubu" path="res://Scripts/ItemsData/item_ability.gd" id="1_dk4y5"]
+[ext_resource type="Script" uid="uid://cljonv8bskj1d" path="res://Scripts/ItemsData/item_data.gd" id="2_ej7ki"]
+[ext_resource type="Texture2D" uid="uid://bb524sybx8413" path="res://Sprites/ItemsTextures/JesusAVGNCharm.png" id="3_ej7ki"]
+
+[resource]
+script = ExtResource("2_ej7ki")
+id = "JesusAVGNCharm1"
+name = "Брелок Хесус"
+author = "Милана DNK"
+texture = ExtResource("3_ej7ki")
+metadata/_custom_type_script = "uid://cljonv8bskj1d"

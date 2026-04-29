@@ -175,7 +175,7 @@ func check_result():
 		elif player_score > 21 and enemy_score < 21:
 			game_result = Results.LOSS
 		elif enemy_score > 21 and player_score < 21:
-			game_result = Results.LOSS
+			game_result = Results.WIN
 		elif last_enemy_action == Actions.STAND and last_player_action == Actions.STAND:
 			if abs(player_score - 21) < abs(enemy_score - 21):
 				game_result = Results.WIN

@@ -1,6 +1,6 @@
-res://main_scene.tscn
+res://PrizeScreen.tscn
 res://shaders/fullscreen_overlay.gdshader
 res://shaders/grayscale.gdshader
-res://Scripts/Cards/CardController_Script.gd
 res://EndScreenControlScript.gd
-res://main_scene.gd
+res://Scripts/PrizeScreenScript.gd
+res://Scripts/ItemsData/item_data.gd
