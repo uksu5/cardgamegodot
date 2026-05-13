@@ -38,8 +38,15 @@ func pick_random_rarity():
 
 func choose_prize():
 	var prize = pick_random_rarity()
-	print(prize)
 	draw_prize(prize)
+	add_item_to_inventory(prize.id, 1)
+
+func add_item_to_inventory(item, amount):
+	if GameData.inventory.has(item):
+		GameData.inventory[item] += amount
+	else:
+		GameData.inventory[item] = amount
+	SaveScript._save_data()
 
 func draw_prize(item):
 	ItemName.text = item.name

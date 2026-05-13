@@ -36,6 +36,9 @@ func _ready():
 	game_result = Results.UNDECIDED
 	cards_deck.shuffle()
 	choose_turn()
+	SaveScript._load_data()
+	print(GameData.inventory)
+	
 	
 func choose_turn():
 	# Случайный выбор хода(игрок/противник)

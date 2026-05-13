@@ -1,4 +1,7 @@
-extends Node
+extends Resource
+
+#КАРТЫ
+
 const CARDS = {
   "6": 6,
   "7": 7,
@@ -13,7 +16,7 @@ const CARDS = {
 
 const CARDS_SUITS = ["c", "d", "h", "s"]
 
-#КОЛОДА 52 КАРТЫ
+#	КОЛОДА 52 КАРТЫ
 const CARDS_DECK52 = [
 "c6","c7","c8","c9","c10","cj","cq","ck","ca",
 "d6","d7","d8","d9","d10","dj","dq","dk","da",
