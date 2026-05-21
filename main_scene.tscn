@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cq58ty4uatjvv"]
 
 [ext_resource type="Texture2D" uid="uid://backhm4mlixux" path="res://Sprites/bg/Background.PNG" id="1_0f027"]
-[ext_resource type="Script" uid="uid://crb42a1chb025" path="res://main_scene.gd" id="1_mo76n"]
+[ext_resource type="Script" uid="uid://crb42a1chb025" path="res://Scripts/main_scene.gd" id="1_mo76n"]
 [ext_resource type="Texture2D" uid="uid://dqq7lrhsvyeha" path="res://Sprites/bg/table.PNG" id="2_2c62f"]
 [ext_resource type="Texture2D" uid="uid://dnw58hcr031ij" path="res://Sprites/bratishnik/blinking_bratishkin1.PNG" id="3_8mm7a"]
 [ext_resource type="Texture2D" uid="uid://d38gdbwbdfv35" path="res://Sprites/bratishnik/blinking_bratishkin2.PNG" id="4_hq1ik"]
@@ -13,10 +13,10 @@
 [ext_resource type="Script" uid="uid://ci2gwmpupj34y" path="res://Scripts/UI/CardsDeckButton.gd" id="10_wr18j"]
 [ext_resource type="Texture2D" uid="uid://dk7lc805urhjp" path="res://Sprites/Buttons/Stand_Button.PNG" id="11_42l1d"]
 [ext_resource type="Script" uid="uid://40vfowku2xup" path="res://Scripts/UI/LogLabel_Script.gd" id="11_qwutr"]
-[ext_resource type="Script" uid="uid://bh1767cbwd4pn" path="res://stand_button_script.gd" id="12_2jcla"]
+[ext_resource type="Script" uid="uid://bh1767cbwd4pn" path="res://Scripts/stand_button_script.gd" id="12_2jcla"]
 [ext_resource type="Script" uid="uid://imnpr0epogpf" path="res://Scripts/Cards/EnemyCardsController_Script.gd" id="13_mo76n"]
-[ext_resource type="Script" uid="uid://chvsmephhss8r" path="res://DeckButtonsScript.gd" id="13_u0ygc"]
-[ext_resource type="Script" uid="uid://de854o1rr2xnr" path="res://turn_banner_script.gd" id="16_m35m6"]
+[ext_resource type="Script" uid="uid://chvsmephhss8r" path="res://Scripts/DeckButtonsScript.gd" id="13_u0ygc"]
+[ext_resource type="Script" uid="uid://de854o1rr2xnr" path="res://Scripts/turn_banner_script.gd" id="16_m35m6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_66tet"]
 animations = [{

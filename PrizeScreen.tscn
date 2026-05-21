@@ -27,7 +27,10 @@ offset_right = 319.0
 offset_bottom = 404.0
 
 [node name="ItemTexture" type="TextureRect" parent="VBoxContainer" unique_id=269027598]
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("2_a1gua")
 
 [node name="ItemName" type="Label" parent="VBoxContainer" unique_id=1387504577]

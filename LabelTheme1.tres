@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://b08by7ajlfm8m"]
+
+[ext_resource type="FontFile" uid="uid://kl4ggk1axi7t" path="res://DelaGothicOne-Regular.ttf" id="1_iankx"]
+
+[resource]
+default_font = ExtResource("1_iankx")
+default_font_size = 38

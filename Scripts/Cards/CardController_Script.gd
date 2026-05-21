@@ -38,8 +38,7 @@ func _ready():
 	choose_turn()
 	SaveScript._load_data()
 	print(GameData.inventory)
-	
-	
+
 func choose_turn():
 	# Случайный выбор хода(игрок/противник)
 	turn = [Turn.PLAYER, Turn.ENEMY].pick_random()
@@ -68,59 +67,60 @@ func enemy_turn():
 
 func monte_carlo() -> int:
 	var iterations = 1000
-	var win_counts = { Actions.HIT: 0, Actions.STAND: 0}
-	#Запуск симуляций для каждого варианта 
+	var win_counts = { Actions.HIT: 0, Actions.STAND: 0 }
 	for action in [Actions.HIT, Actions.STAND]:
 		for i in range(iterations):
 			if simulate_game(action):
 				win_counts[action] += 1
-	#Проверка более выгодного действия и возврат его
-	if win_counts[Actions.HIT] > win_counts[Actions.STAND]:
-		return Actions.HIT
-	return Actions.STAND
-	
-func simulate_game(starting_action):
+				
+	if win_counts[Actions.STAND] >= win_counts[Actions.HIT]:
+		return Actions.STAND
+	return Actions.HIT
+
+func simulate_game(starting_action) -> bool:
 	var sim_deck = cards_deck.duplicate()
 	sim_deck.shuffle()
-	
+
 	var sim_enemy_cards = enemy_cards.duplicate()
 	var sim_player_cards = player_cards.duplicate()
-	
-	# Ход врага (начальное действие)
+
+	var sim_enemy_score = get_score(sim_enemy_cards)
+	var sim_player_score = get_score(sim_player_cards)
+	# Стартовые действия бота
 	if starting_action == Actions.HIT:
 		if sim_deck.is_empty(): return false
 		sim_enemy_cards.append(sim_deck.pop_back())
-		
-	var sim_enemy_score = get_score(sim_enemy_cards)
-	if sim_enemy_score > 21: 
-		return false
-	
-	# Враг добирает до 17
-	while sim_enemy_score < 17:
-		if sim_deck.is_empty(): break
-		sim_enemy_cards.append(sim_deck.pop_back())
 		sim_enemy_score = get_score(sim_enemy_cards)
-	
-	var sim_player_score = get_score(sim_player_cards)
-	
-	while sim_player_score < 17:
-		if sim_deck.is_empty(): break
-		sim_player_cards.append(sim_deck.pop_back())
-		sim_player_score = get_score(sim_player_cards)
-	
-	# Финальное сравнение
-	if sim_player_score > 21:
-		return true
-	if sim_enemy_score > 21:
-		return false
+	if sim_enemy_score > 21: 
+		return false # Бот сразу проиграл от перебора
 		
-	return sim_enemy_score > sim_player_score
+	# Дальнейшие действия бота 
+	if starting_action == Actions.HIT:
+		while sim_enemy_score < 17:
+			if sim_deck.is_empty(): break
+			sim_enemy_cards.append(sim_deck.pop_back())
+			sim_enemy_score = get_score(sim_enemy_cards)
+			if sim_enemy_score > 21: 
+				return false
+				
+	# Действия игрока
+	if last_player_action != Actions.STAND:
+		while sim_player_score < 17:
+			if sim_deck.is_empty(): break
+			sim_player_cards.append(sim_deck.pop_back())
+			sim_player_score = get_score(sim_player_cards)
+			if sim_player_score > 21: 
+				return true # Игрок перебрал, бот победил
+				
+	if sim_player_score > 21: return true
+	if sim_enemy_score > 21: return false
+	
+	return sim_enemy_score >= sim_player_score
 			
 func player_turn():
 	state = GameState.PLAYER_TURN
 	logging_box.add_log("Ход игрока")
 	
-# ШТУЧКИ
 func get_score(cards) -> int:
 	var score = 0
 	for card in cards:
@@ -184,19 +184,24 @@ func check_result():
 				game_result = Results.WIN
 			else:
 				game_result = Results.LOSS
-	else:
-		state = GameState.GAME_OVER
-		next_step()	
 func next_step():
 	match state:
 		GameState.PLAYER_TURN:
 			turn_banner.fade_in_out("player")
 			check_result()
-			player_turn()
+			if game_result == Results.UNDECIDED:
+				player_turn()
+			else:
+				state = GameState.GAME_OVER
+				deferred_next_step()	
 		GameState.ENEMY_TURN:
 			turn_banner.fade_in_out("enemy")
 			check_result()
-			enemy_turn()
+			if game_result == Results.UNDECIDED:
+				enemy_turn()
+			else:
+				state = GameState.GAME_OVER
+				deferred_next_step()	
 		GameState.GAME_OVER:
 			game_end(game_result)
 

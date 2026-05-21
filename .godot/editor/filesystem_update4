@@ -1,5 +1,8 @@
-res://Scripts/PrizeScreenScript.gd
-res://main_scene.tscn
+res://EndScreen.tscn
 res://shaders/fullscreen_overlay.gdshader
+res://shaders/outline_shader.gdshader
 res://shaders/grayscale.gdshader
-res://Scripts/SaveLoad_script.gd
+res://prize_panel.gd
+res://LabelTheme1.tres
+res://main_scene.tscn
+res://main_scene.gd

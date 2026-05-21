@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource("2_cf23g")
 id = "BratishkinStitchCharm"
-name = "Брелок Братигкин и Ститч"
+name = "Брелок Братишкин и Стич"
 author = "Милана DNK"
-rarity = 1
+rarity = 2
 texture = ExtResource("3_kkbb2")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"
