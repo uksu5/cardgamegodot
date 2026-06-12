@@ -40,9 +40,7 @@ var rarity_names: Dictionary = {
 }
 
 
-func _ready() -> void:
-	BoxNode.material.set_shader_parameter("glow_strength", 0.0)
-	
+func start_prize_panel():
 	var dir = DirAccess.open(path)
 	for file in dir.get_files():
 		if file.ends_with(".tres"):
@@ -78,19 +76,17 @@ func draw_prize(item):
 func write_labels(item):
 	ItemName.text = item.name
 	ItemAuthor.text = item.author
-	ItemRarity.text = rarity_names[item.rarity].to_upper()
+	ItemRarity.text = rarity_names[item.rarity]
+	if item.rarity != 0:
+		ItemRarity.text.to_upper()
+		ButtonStringCassette.color = rarity_colors[item.rarity]
+		ButtonStringMenu.color = rarity_colors[item.rarity]
+	
 	ItemTexture.texture = item.texture
 
+
 func change_box(rarity):
-	BoxNode.material.set_shader_parameter("outline_color", rarity_colors[rarity])
-	BoxNode.material.set_shader_parameter("fill_color", rarity_colors[rarity])
-	ButtonStringCassette.color = rarity_colors[rarity]
-	ButtonStringMenu.color = rarity_colors[rarity]
-	if rarity != ItemData.Rarity.GARBAGE:
-		ItemRarity.add_theme_color_override("font_color", rarity_colors[rarity])
-		BoxNode.material.set_shader_parameter("glow_color", rarity_colors[rarity])
-		BoxNode.material.set_shader_parameter("glow_strength", 1.7)
-		
+	BoxNode.texture = load("res://baked_boxes/box_%s.png" % str(rarity))
 	
 		
 func add_item_to_inventory(item, amount):

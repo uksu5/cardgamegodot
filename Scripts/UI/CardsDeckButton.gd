@@ -26,6 +26,7 @@ func add_card_on_screen(card):
 
 	# добавление во временного родителя для анимации
 	add_child(card_sprite)
+	card_sprite.set_as_top_level(true)
 
 	card_sprite.global_position = global_position
 
@@ -34,6 +35,6 @@ func add_card_on_screen(card):
 		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
 	await tween.finished
-
 	remove_child(card_sprite)
 	hbox_container.add_child(card_sprite)
+	card_sprite.set_as_top_level(false)

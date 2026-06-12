@@ -1,3 +1,4 @@
+MarginContainer
 CollisionShape2D
 Area2D
 VBoxContainer

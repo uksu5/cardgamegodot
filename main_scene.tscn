@@ -105,6 +105,7 @@ offset_left = 22.0
 offset_top = 25.0
 offset_right = 468.0
 offset_bottom = 210.0
+scroll_following = true
 script = ExtResource("11_qwutr")
 
 [node name="EnemyCardsContainer" type="Control" parent="." unique_id=2130740600]

@@ -11,7 +11,8 @@ const CARDS = {
   "j": 2,
   "q": 3,
   "k": 4,
-  "a": 11
+  "a": 11,
+  "1": 1
 }
 
 const CARDS_SUITS = ["c", "d", "h", "s"]

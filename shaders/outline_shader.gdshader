@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_thickness = 2.0;
+uniform float outline_thickness = 8.0;
 
 uniform vec4 fill_color : source_color = vec4(1.0);
 uniform float fill_opacity = 1.0;
@@ -106,7 +106,8 @@ void fragment() {
     // FINAL COMPOSITION
     // ==================================================
     // Собираем слои как в Photoshop: Свечение -> Обводка -> Заливка
-    vec4 base_layer = glow_layer;R    vec4 outline_layer = blend_layers(out_col, base_layer);
+    vec4 base_layer = glow_layer;
+    vec4 outline_layer = blend_layers(out_col, base_layer);
     vec4 final_color = blend_layers(fill, outline_layer);
 
     COLOR = final_color;

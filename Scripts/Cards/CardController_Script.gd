@@ -22,15 +22,15 @@ var enemy_score := 0
 var player_score = 0
 var player_cards = []
 
-enum Actions {HIT, STAND}
+enum Actions {HIT, STAND, UNDECIDED}
 enum Turn {PLAYER, ENEMY}
 enum GameState {PLAYER_TURN, ENEMY_TURN, GAME_OVER}
 enum Results {WIN, LOSS, DRAW, UNDECIDED}
 
 var state = GameState.PLAYER_TURN
 
-var last_player_action = Actions.HIT
-var last_enemy_action = Actions.HIT
+var last_player_action = Actions.UNDECIDED
+var last_enemy_action = Actions.UNDECIDED
 	
 func _ready():
 	game_result = Results.UNDECIDED
@@ -38,7 +38,6 @@ func _ready():
 	choose_turn()
 	SaveScript._load_data()
 	print(GameData.inventory)
-
 func choose_turn():
 	# Случайный выбор хода(игрок/противник)
 	turn = [Turn.PLAYER, Turn.ENEMY].pick_random()
@@ -51,11 +50,11 @@ func choose_turn():
 
 func enemy_turn():
 	state = GameState.ENEMY_TURN
-	if enemy_cards.is_empty():
-		take_card_enemy()
-		return
+	#if enemy_cards.is_empty():
+	#	take_card_enemy()
+	#	return
 	logging_box.add_log("Ход врага")
-	await get_tree().create_timer(randf_range(2.0, 7.0)).timeout
+	await get_tree().create_timer(randf_range(1.0, 5.0)).timeout
 	#запуск монте-карло
 	var decision = monte_carlo()
 	if decision == Actions.HIT:
@@ -122,9 +121,13 @@ func player_turn():
 	logging_box.add_log("Ход игрока")
 	
 func get_score(cards) -> int:
-	var score = 0
+	var score := 0
+	var cards_substr := []
 	for card in cards:
+		cards_substr.append([(card.substr(1, len(card)))])
 		score += cards_rate[(card.substr(1, len(card)))]
+	if cards_substr.count(["a"]) > 1:
+		score -= ((cards_substr.count(["a"])-1)*10)
 	return score
 	
 func take_card_enemy():
@@ -171,7 +174,7 @@ func check_result():
 	if game_result == Results.UNDECIDED:
 		if player_score == 21 and enemy_score != 21:
 			game_result = Results.WIN
-		elif player_score == 21 and enemy_score == 21:
+		elif player_score == enemy_score and last_enemy_action == Actions.STAND and last_player_action == Actions.STAND:
 			game_result = Results.DRAW
 		elif enemy_score == 21 and player_score != 21:
 			game_result = Results.LOSS
@@ -206,6 +209,10 @@ func next_step():
 			game_end(game_result)
 
 func game_end(result):
+	end_screen.PrizePanel.visible = false
+	if result == Results.WIN:
+		end_screen.PrizePanel.visible = true
+		end_screen.PrizePanel.start_prize_panel()
 	end_screen.show_result(result)
 	get_parent().add_child(end_screen)
 func deferred_next_step():
