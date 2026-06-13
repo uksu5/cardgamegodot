@@ -27,7 +27,7 @@ size = Vector2(229, 57)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5sn3"]
 size = Vector2(136, 57)
 
-[node name="Control" type="Control" unique_id=1706940044 node_paths=PackedStringArray("ResultBanner", "ShaderOverlay", "PrizePanel")]
+[node name="Control" type="Control" unique_id=1706940044 node_paths=PackedStringArray("ResultBanner", "ShaderOverlay", "PrizePanel", "CassetteButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +39,7 @@ ResultBanner = NodePath("CanvasLayer/ResultBanner")
 ShaderOverlay = NodePath("CanvasLayer/ShaderOverlay")
 PrizePanel = NodePath("CanvasLayer/PrizePanel")
 PrizePanelScript = ExtResource("4_57pct")
+CassetteButton = NodePath("")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953474717]
 
@@ -75,65 +76,15 @@ texture = ExtResource("1_ekb8w")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=449555275]
-offset_left = 689.0
-offset_top = 935.0
-offset_right = 1261.0
-offset_bottom = 1015.0
-
-[node name="CassetteButton" type="Area2D" parent="CanvasLayer/MarginContainer" unique_id=1717874953]
-position = Vector2(37, 7)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MarginContainer/CassetteButton" unique_id=1010900493]
-offset_top = 60.0
-offset_right = 149.0
-offset_bottom = 67.0
-scale = Vector2(1.505, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/CassetteButton" unique_id=1498199180]
-offset_right = 40.0
-offset_bottom = 23.0
-theme = ExtResource("7_57pct")
-theme_override_constants/outline_size = 9
-text = "Шкатулка"
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/MarginContainer/CassetteButton" unique_id=1600526192]
-position = Vector2(112.5, 41.5)
-shape = SubResource("RectangleShape2D_57pct")
-
-[node name="MenuButton" type="Area2D" parent="CanvasLayer/MarginContainer" unique_id=2022670874]
-position = Vector2(386, 7)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MarginContainer/MenuButton" unique_id=1080782530]
-offset_top = 60.0
-offset_right = 86.095
-offset_bottom = 67.0
-scale = Vector2(1.505, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/MenuButton" unique_id=487336004]
-offset_right = 130.0
-offset_bottom = 56.0
-theme = ExtResource("7_57pct")
-theme_override_constants/outline_size = 9
-text = "Меню"
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/MarginContainer/MenuButton" unique_id=777253384]
-position = Vector2(65, 41.5)
-shape = SubResource("RectangleShape2D_g5sn3")
-
 [node name="PrizePanel" type="CanvasLayer" parent="CanvasLayer" unique_id=1775369654 node_paths=PackedStringArray("BoxNode", "ButtonCassette", "ButtonStringCassette", "ButtonTextCassette", "ButtonStringMenu", "ButtonTextMenu", "ItemTexture", "ItemName", "ItemAuthor", "ItemRarity")]
 script = ExtResource("4_57pct")
 BoxNode = NodePath("Box")
 OutlineShader = ExtResource("5_g5sn3")
-ButtonCassette = NodePath("../MarginContainer/CassetteButton")
-ButtonStringCassette = NodePath("../MarginContainer/CassetteButton/ColorRect")
-ButtonTextCassette = NodePath("../MarginContainer/CassetteButton/Label")
-ButtonStringMenu = NodePath("../MarginContainer/MenuButton/ColorRect")
-ButtonTextMenu = NodePath("../MarginContainer/MenuButton/Label")
+ButtonCassette = NodePath("")
+ButtonStringCassette = NodePath("../HBoxContainer/CassetteButton/ColorRect")
+ButtonTextCassette = NodePath("../HBoxContainer/CassetteButton/Label")
+ButtonStringMenu = NodePath("../HBoxContainer/MenuButton/ColorRect")
+ButtonTextMenu = NodePath("../HBoxContainer/MenuButton/Label")
 ItemTexture = NodePath("PrizeTexture")
 ItemName = NodePath("Box/VBoxContainer/ItemName")
 ItemAuthor = NodePath("Box/VBoxContainer/ItemAuthor")
@@ -203,3 +154,69 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_57pct")
 expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=449555275]
+offset_left = 689.0
+offset_top = 935.0
+offset_right = 1261.0
+offset_bottom = 1015.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=2016689467]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = 392.0
+offset_right = -236.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(14.52, 1.8399951)
+
+[node name="CassetteButton" type="Area2D" parent="CanvasLayer/HBoxContainer" unique_id=741879807]
+position = Vector2(2.8925629, 5.434784)
+scale = Vector2(0.06887052, 0.54347974)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HBoxContainer/CassetteButton" unique_id=1010900493]
+offset_top = 60.0
+offset_right = 149.0
+offset_bottom = 67.0
+scale = Vector2(1.505, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/CassetteButton" unique_id=1498199180]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("7_57pct")
+theme_override_constants/outline_size = 9
+text = "Шкатулка"
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/CassetteButton" unique_id=1600526192]
+position = Vector2(112.5, 41.5)
+shape = SubResource("RectangleShape2D_57pct")
+
+[node name="MenuButton" type="Area2D" parent="CanvasLayer/HBoxContainer" unique_id=2022670874]
+position = Vector2(26.928375, 5.434784)
+scale = Vector2(0.06887052, 0.54347974)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HBoxContainer/MenuButton" unique_id=1080782530]
+offset_top = 60.0
+offset_right = 86.095
+offset_bottom = 67.0
+scale = Vector2(1.505, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/MenuButton" unique_id=487336004]
+offset_right = 130.0
+offset_bottom = 56.0
+theme = ExtResource("7_57pct")
+theme_override_constants/outline_size = 9
+text = "Меню"
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/HBoxContainer/MenuButton" unique_id=777253384]
+position = Vector2(65, 41.5)
+shape = SubResource("RectangleShape2D_g5sn3")

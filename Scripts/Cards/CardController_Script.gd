@@ -65,7 +65,7 @@ func enemy_turn():
 		stand_enemy()
 
 func monte_carlo() -> int:
-	var iterations = 1000
+	var iterations = 100
 	var win_counts = { Actions.HIT: 0, Actions.STAND: 0 }
 	for action in [Actions.HIT, Actions.STAND]:
 		for i in range(iterations):

@@ -1,8 +1,5 @@
-res://Scripts/Cards/CardController_Script.gd
-res://EndScreen.tscn
+res://Scripts/prize_panel.gd
+res://main_scene.tscn
 res://shaders/fullscreen_overlay.gdshader
 res://shaders/outline_shader.gdshader
 res://shaders/grayscale.gdshader
-res://Scripts/prize_panel.gd
-res://main_scene.tscn
-res://LabelTheme1.tres

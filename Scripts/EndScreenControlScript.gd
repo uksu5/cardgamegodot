@@ -6,6 +6,7 @@ extends Control
 @export var ItemData := Resource
 @export var PrizePanel := CanvasLayer
 @export var PrizePanelScript := Script
+@export var CassetteButton := Area2D
 var prize_screen = preload("res://PrizeScreen.tscn").instantiate()
 enum Results {WIN, LOSS, DRAW, UNDECIDED}
 var result = Results.UNDECIDED

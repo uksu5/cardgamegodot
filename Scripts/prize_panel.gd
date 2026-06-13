@@ -33,10 +33,10 @@ var rarity_colors: Dictionary = {
 }
 
 var rarity_names: Dictionary = {
-	ItemData.Rarity.GARBAGE: "Мусор",
-	ItemData.Rarity.COMMON: "Обычный",
-	ItemData.Rarity.RARE: "Редкий",
-	ItemData.Rarity.LEGENDARY: "Легендарный"
+	ItemData.Rarity.GARBAGE: "мусор",
+	ItemData.Rarity.COMMON: "обычный",
+	ItemData.Rarity.RARE: "редкий",
+	ItemData.Rarity.LEGENDARY: "легендарный"
 }
 
 
@@ -81,6 +81,7 @@ func write_labels(item):
 		ItemRarity.text.to_upper()
 		ButtonStringCassette.color = rarity_colors[item.rarity]
 		ButtonStringMenu.color = rarity_colors[item.rarity]
+		ItemRarity.add_theme_color_override('font_color', rarity_colors[item.rarity])
 	
 	ItemTexture.texture = item.texture
 
