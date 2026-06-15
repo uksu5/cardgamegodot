@@ -6,6 +6,7 @@ extends Node
 
 @export var ButtonCassette: Area2D
 
+@export var ButtonsGroup: Node
 
 @export var ButtonStringCassette: ColorRect
 @export var ButtonTextCassette: Label
@@ -77,10 +78,10 @@ func write_labels(item):
 	ItemName.text = item.name
 	ItemAuthor.text = item.author
 	ItemRarity.text = rarity_names[item.rarity]
+	ButtonStringCassette.color = rarity_colors[item.rarity]
+	ButtonStringMenu.color = rarity_colors[item.rarity]
 	if item.rarity != 0:
 		ItemRarity.text.to_upper()
-		ButtonStringCassette.color = rarity_colors[item.rarity]
-		ButtonStringMenu.color = rarity_colors[item.rarity]
 		ItemRarity.add_theme_color_override('font_color', rarity_colors[item.rarity])
 	
 	ItemTexture.texture = item.texture
