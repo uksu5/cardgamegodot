@@ -24,7 +24,23 @@ shader_parameter/depth_fade_power = 2.08100009558762
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57pct"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35nnx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j08qy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wisha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y6alj"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g5sn3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmfwn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_inuj4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3okm5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xhcbp"]
 
 [node name="Control" type="Control" unique_id=1706940044 node_paths=PackedStringArray("ResultBanner", "ShaderOverlay", "PrizePanel", "ButtonsGroup", "ExitTimerLabel", "ExitTimer")]
 layout_mode = 3
@@ -175,6 +191,10 @@ offset_top = -4.080078
 offset_right = 224.39996
 offset_bottom = 74.91992
 theme_override_styles/normal = SubResource("StyleBoxEmpty_57pct")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_35nnx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j08qy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wisha")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y6alj")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Buttons/CassetteButton" unique_id=1010900493]
 layout_mode = 0
@@ -204,6 +224,10 @@ offset_top = 941.52
 offset_right = 1203.32
 offset_bottom = 1014.52
 theme_override_styles/normal = SubResource("StyleBoxEmpty_g5sn3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dmfwn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_inuj4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3okm5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xhcbp")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Buttons/MenuButton" unique_id=1080782530]
 layout_mode = 0

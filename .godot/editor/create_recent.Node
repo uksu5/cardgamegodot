@@ -1,3 +1,4 @@
+TextureRect
 Timer
 Label
 Node
@@ -11,5 +12,3 @@ VBoxContainer
 Control
 ColorRect
 CenterContainer
-Container
-Panel
