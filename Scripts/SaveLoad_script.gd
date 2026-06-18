@@ -23,7 +23,7 @@ func _load_data():
 		return
 	var file = FileAccess.open(save_location, FileAccess.READ)
 	var data = file.get_var()
-	print(data.duplicate())
+	#print(data.duplicate())
 	file.close()
 	var loaded_data = data.duplicate()
 	

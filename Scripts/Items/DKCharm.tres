@@ -10,5 +10,6 @@ id = "DKCharm"
 name = "Брелок Даня Кашин"
 author = "хелпус"
 rarity = 2
+description = "Чота там DK. подробное описание будет когда-нибудь потом"
 texture = ExtResource("3_21f0i")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"

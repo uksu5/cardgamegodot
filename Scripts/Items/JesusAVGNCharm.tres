@@ -9,5 +9,7 @@ script = ExtResource("2_ej7ki")
 id = "JesusAVGNCharm1"
 name = "Брелок Хесус"
 author = "Милана DNK"
+rarity = 1
+description = "ПРИЗНАН ИНОАГЕНТОМ НА ТЕРРИТОРИИ РФ"
 texture = ExtResource("3_ej7ki")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"

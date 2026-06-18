@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://dj6i2h7u6f6ef"]
+
+[ext_resource type="Script" uid="uid://bklsbmbjftjmu" path="res://cassette_control_script.gd" id="1_fuxiu"]
+[ext_resource type="Texture2D" uid="uid://teg8dtmaakyo" path="res://Sprites/CassetteSpriteTexture.PNG" id="1_s06tx"]
+[ext_resource type="Texture2D" uid="uid://bjyubkq55u2o2" path="res://Sprites/banners/box2.png" id="3_sx8ff"]
+[ext_resource type="Theme" uid="uid://b08by7ajlfm8m" path="res://LabelTheme1.tres" id="4_yhtyx"]
+[ext_resource type="Texture2D" uid="uid://b2fftg5gquhd7" path="res://Sprites/ItemsTextures/BratishkinStitchCharm.png" id="5_5ea0d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sx8ff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhtyx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ea0d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vm3jc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uj5kt"]
+
+[node name="CassetteSceneControl" type="Control" unique_id=1798816060 node_paths=PackedStringArray("grid_container", "PrizeBox", "DescriptionBox", "PrizeTexture", "ItemName", "ItemAuthor", "ItemRarity", "ItemDescription")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = 25.0
+offset_right = -77.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fuxiu")
+grid_container = NodePath("GridContainer")
+PrizeBox = NodePath("Box")
+DescriptionBox = NodePath("Box/Box2")
+PrizeTexture = NodePath("Box/PrizeTexture")
+ItemName = NodePath("Box/VBoxContainer/ItemName")
+ItemAuthor = NodePath("Box/VBoxContainer/ItemAuthor")
+ItemRarity = NodePath("Box/VBoxContainer/ItemRarity")
+ItemDescription = NodePath("Box/Log label")
+
+[node name="CassetteSprite" type="TextureRect" parent="." unique_id=994894485]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -174.0
+offset_right = 1543.75
+offset_bottom = 1086.0
+texture = ExtResource("1_s06tx")
+metadata/_edit_lock_ = true
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=114332403]
+z_index = 2
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = 234.00002
+offset_top = 333.0
+offset_right = 384.0
+offset_bottom = 483.0
+scale = Vector2(0.99905026, 1)
+columns = 7
+
+[node name="Box" type="TextureRect" parent="." unique_id=1314706098]
+layout_mode = 0
+offset_left = 940.0
+offset_top = -92.0
+offset_right = 2438.0
+offset_bottom = 840.0
+texture = ExtResource("3_sx8ff")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=1240919473]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_right = 0.965
+anchor_bottom = 1.0
+offset_left = 405.799
+offset_top = -1.165
+offset_right = -410.0609
+offset_bottom = -1.164978
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ItemName" type="Label" parent="Box/VBoxContainer" unique_id=653109595]
+layout_mode = 2
+theme = ExtResource("4_yhtyx")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+text = "Название"
+horizontal_alignment = 1
+
+[node name="ItemAuthor" type="Label" parent="Box/VBoxContainer" unique_id=552617589]
+layout_mode = 2
+theme = ExtResource("4_yhtyx")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+text = "Автор"
+horizontal_alignment = 1
+
+[node name="ItemRarity" type="Label" parent="Box/VBoxContainer" unique_id=2075179833]
+layout_mode = 2
+theme = ExtResource("4_yhtyx")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+text = "Редкость"
+horizontal_alignment = 1
+
+[node name="PrizeTexture" type="TextureRect" parent="Box" unique_id=613908528]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -395.0
+offset_right = 144.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 150)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_5ea0d")
+expand_mode = 1
+
+[node name="Box2" type="TextureRect" parent="Box" unique_id=2056196668]
+layout_mode = 0
+offset_top = 292.0
+offset_right = 1498.0
+offset_bottom = 1224.0
+texture = ExtResource("3_sx8ff")
+
+[node name="Log label" type="RichTextLabel" parent="Box" unique_id=1437527674]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 632.0
+offset_right = 1027.425
+offset_bottom = 892.9
+theme = ExtResource("4_yhtyx")
+theme_override_constants/outline_size = 9
+scroll_following = true
+
+[node name="ToMenuButton" type="Button" parent="." unique_id=957607955]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38000003
+anchor_top = 0.87600005
+anchor_right = 0.38000003
+anchor_bottom = 0.87600005
+offset_left = 1085.3999
+offset_top = 21.919922
+offset_right = 1253.8499
+offset_bottom = 100.91992
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sx8ff")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhtyx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ea0d")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vm3jc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uj5kt")
+
+[node name="ColorRect" type="ColorRect" parent="ToMenuButton" unique_id=484771613]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 108.775
+offset_bottom = 67.0
+scale = Vector2(1.505, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ToMenuButton" unique_id=1986323857]
+layout_mode = 0
+offset_right = 222.0
+offset_bottom = 56.0
+theme = ExtResource("4_yhtyx")
+theme_override_constants/outline_size = 9
+text = "В меню"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="ToMenuButton" to="." method="_on_to_menu_button_button_down"]

@@ -93,11 +93,10 @@ texture = ExtResource("1_ekb8w")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="PrizePanel" type="CanvasLayer" parent="CanvasLayer" unique_id=1775369654 node_paths=PackedStringArray("BoxNode", "ButtonsGroup", "ButtonStringCassette", "ButtonTextCassette", "ButtonStringMenu", "ButtonTextMenu", "ItemTexture", "ItemName", "ItemAuthor", "ItemRarity")]
+[node name="PrizePanel" type="CanvasLayer" parent="CanvasLayer" unique_id=1775369654 node_paths=PackedStringArray("BoxNode", "ButtonStringCassette", "ButtonTextCassette", "ButtonStringMenu", "ButtonTextMenu", "ItemTexture", "ItemName", "ItemAuthor", "ItemRarity")]
 script = ExtResource("4_57pct")
 BoxNode = NodePath("Box")
 OutlineShader = ExtResource("5_g5sn3")
-ButtonsGroup = NodePath("../Buttons")
 ButtonStringCassette = NodePath("../Buttons/CassetteButton/ColorRect")
 ButtonTextCassette = NodePath("../Buttons/CassetteButton/Label")
 ButtonStringMenu = NodePath("../Buttons/MenuButton/ColorRect")
@@ -113,7 +112,6 @@ offset_top = 319.0
 offset_right = 1722.0
 offset_bottom = 1251.0
 texture = ExtResource("6_g5sn3")
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PrizePanel/Box" unique_id=1569161647]
 layout_mode = 1
@@ -178,7 +176,7 @@ offset_top = 935.0
 offset_right = 1261.0
 offset_bottom = 1015.0
 
-[node name="Buttons" type="Node" parent="CanvasLayer" unique_id=1802621251]
+[node name="Buttons" type="Node2D" parent="CanvasLayer" unique_id=1323414385]
 
 [node name="CassetteButton" type="Button" parent="CanvasLayer/Buttons" unique_id=796964029]
 anchors_preset = -1
@@ -186,10 +184,10 @@ anchor_left = 0.38000003
 anchor_top = 0.87600005
 anchor_right = 0.38000003
 anchor_bottom = 0.87600005
-offset_left = -3.6000366
-offset_top = -4.080078
-offset_right = 224.39996
-offset_bottom = 74.91992
+offset_left = 721.0
+offset_top = 936.0
+offset_right = 949.0
+offset_bottom = 1015.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_57pct")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_35nnx")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_j08qy")
@@ -197,7 +195,10 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_wisha")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_y6alj")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Buttons/CassetteButton" unique_id=1010900493]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.050256293
+anchor_right = -0.050256293
 offset_top = 60.0
 offset_right = 149.0
 offset_bottom = 67.0
@@ -210,7 +211,7 @@ offset_right = 222.0
 offset_bottom = 56.0
 theme = ExtResource("7_57pct")
 theme_override_constants/outline_size = 9
-text = "Шкатулка"
+text = "По новой"
 metadata/_edit_use_anchors_ = true
 
 [node name="MenuButton" type="Button" parent="CanvasLayer/Buttons" unique_id=2016036231]
@@ -250,6 +251,7 @@ text = "Меню"
 metadata/_edit_use_anchors_ = true
 
 [node name="ExitTimerLabel" type="Label" parent="CanvasLayer" unique_id=1983738406]
+visible = false
 anchors_preset = -1
 anchor_left = 0.509
 anchor_top = 0.864
@@ -266,5 +268,8 @@ text = "Выход в меню"
 script = ExtResource("9_g5sn3")
 
 [node name="ExitTimer" type="Timer" parent="." unique_id=220601341]
-wait_time = 5.0
-one_shot = true
+wait_time = 4.811000000000001
+
+[connection signal="button_down" from="CanvasLayer/Buttons/CassetteButton" to="." method="_on_cassette_button_down"]
+[connection signal="button_down" from="CanvasLayer/Buttons/MenuButton" to="." method="_on_menu_button_down"]
+[connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

@@ -33,7 +33,10 @@ var last_player_action = Actions.UNDECIDED
 var last_enemy_action = Actions.UNDECIDED
 	
 func _ready():
+	GlobalScripts.color_rect_fadeout()
+
 	game_result = Results.UNDECIDED
+	cards_deck.shuffle()
 	cards_deck.shuffle()
 	choose_turn()
 	SaveScript._load_data()

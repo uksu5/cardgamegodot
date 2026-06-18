@@ -10,6 +10,6 @@ id = "BratishkinBananaCharm"
 name = "Брелок Братишкин"
 author = "днед"
 rarity = 3
-abilities = Array[ExtResource("1_wjmc1")]([null])
+description = "Чота там братишкин в банане. подробное описание будет когда-нибудь потом"
 texture = ExtResource("3_vbmvm")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"

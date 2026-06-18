@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dm71ha4c34p3m"]
+
+[ext_resource type="Script" uid="uid://8m5f06r2dubu" path="res://Scripts/ItemsData/item_ability.gd" id="1_xxh33"]
+[ext_resource type="Script" uid="uid://cljonv8bskj1d" path="res://Scripts/ItemsData/item_data.gd" id="2_kh66j"]
+[ext_resource type="Texture2D" uid="uid://dbw4ttq1imwif" path="res://Sprites/ItemsTextures/Garbage/Garbage_Item_Paper.png" id="3_ntkg4"]
+
+[resource]
+script = ExtResource("2_kh66j")
+id = "PaperGarbage"
+name = "Скомканный лист"
+texture = ExtResource("3_ntkg4")
+metadata/_custom_type_script = "uid://cljonv8bskj1d"

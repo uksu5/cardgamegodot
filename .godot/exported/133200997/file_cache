@@ -1,0 +1,17 @@
+res://Scripts/Items/BratishkinBananaCharm.tres::f2c26c5a0ec87bdfced28645c248d0e5::1781737926::res://.godot/exported/133200997/export-dff54fe61cebb5ca88e6b5268c1e7cbd-BratishkinBananaCharm.res
+res://Scripts/Items/BratishkinStitchCharmItem.tres::4c65161c4d1cd7f19b5ca36630a68028::1781737926::res://.godot/exported/133200997/export-9f474999489f1294f732a3185bcbac31-BratishkinStitchCharmItem.res
+res://Scripts/Items/CanLidGarbage.tres::ab41788ee1621497ded9232031733904::1781737926::res://.godot/exported/133200997/export-9c897c76c5b944d703c0709bff29e4b4-CanLidGarbage.res
+res://Scripts/Items/DKCharm.tres::b87af71b5927c38411f680974e1dea34::1781737926::res://.godot/exported/133200997/export-9680efa8834bfadbdd9d59ee9715724c-DKCharm.res
+res://Scripts/Items/JesusAVGNCharm.tres::e4aa001a2f57847a6d86acf6a272f89b::1781737926::res://.godot/exported/133200997/export-f8aeb806aa6293e13e78bc84c10896c3-JesusAVGNCharm.res
+res://Scripts/Items/PaperGarbage.tres::ba1137521cf9187cc649e1ddfe922be2::1781737926::res://.godot/exported/133200997/export-36082136967809146ec0c030d3f96677-PaperGarbage.res
+res://Scripts/Items/PullTabGarbage.tres::169f063a5247f090a78bfd18c2bdac03::1781737926::res://.godot/exported/133200997/export-4b43831842416d31fec6b733d2aba485-PullTabGarbage.res
+res://Scripts/Items/T2XTLuckyCharm.tres::ecfc5b74e42b2d5f8ef76e62ac52b7d7::1781737926::res://.godot/exported/133200997/export-29ff919ca61e284e164e2b2ab38be589-T2XTLuckyCharm.res
+res://boxbaker.tscn::6066f5fce37c5f3acb284d692c8db3ed::1781737926::res://.godot/exported/133200997/export-d966574700332e0d5bd755732c91287e-boxbaker.scn
+res://cassette_scene.tscn::cf618926baa546e3ec9805e039892362::1781737926::res://.godot/exported/133200997/export-0068c2abadba99328d99f0c81f485813-cassette_scene.scn
+res://EndScreen.tscn::5ee8eeabafe32ac4d78884eedd24ffdb::1781737932::res://.godot/exported/133200997/export-d0513459530ff2bf253c0d6fecac6858-EndScreen.scn
+res://LabelTheme1.tres::35f25c17e19ce4805dbd9c4cd88ef9ac::1781642541::res://.godot/exported/133200997/export-70b43bc8e096aed9f0158124f77a4f88-LabelTheme1.res
+res://mainmenu.tscn::369580f360364a1360cb87b86b1e1cfb::1781737926::res://.godot/exported/133200997/export-cf97c0526909cefae368ac4c5ddec4e2-mainmenu.scn
+res://main_scene.tscn::9603f8509c01e374207fa9ec007e8c60::1781739744::res://.godot/exported/133200997/export-fac9db9380da720a7609154e1ecab771-main_scene.scn
+res://menucontrol.tscn::0ee81563780d36afbcb71d766bab1275::1781737926::res://.godot/exported/133200997/export-fcd7a9becf09ccc4cd86bfcdd71cb2b9-menucontrol.scn
+res://PrizeScreen.tscn::b42f5b86faef95dd0b6d3a0507e53991::1781737926::res://.godot/exported/133200997/export-33cb9f24e2a5bd29c572c2750141d28e-PrizeScreen.scn
+res://ScreenItem.tscn::79b8e6f42d56c91d5744301327af1c7a::1781737926::res://.godot/exported/133200997/export-54642f30c5abe8685757edd34f66f72b-ScreenItem.scn

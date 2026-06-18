@@ -10,5 +10,6 @@ id = "BratishkinStitchCharm"
 name = "Брелок Братишкин и Стич"
 author = "Милана DNK"
 rarity = 2
+description = "Чота там братишкин с стичем. подробное описание будет когда-нибудь потом"
 texture = ExtResource("3_kkbb2")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bimtympx7onfm"]
+
+[ext_resource type="Texture2D" uid="uid://btogtijqvoifa" path="res://Sprites/bg/bg_menu.png" id="1_s7r3b"]
+[ext_resource type="Script" uid="uid://b4psfi6befvio" path="res://menucontrol_script.gd" id="1_yup4i"]
+[ext_resource type="PackedScene" uid="uid://pnkotf5dq7a7" path="res://mainmenu.tscn" id="2_tj2lh"]
+[ext_resource type="PackedScene" uid="uid://dj6i2h7u6f6ef" path="res://cassette_scene.tscn" id="3_tj2lh"]
+
+[node name="Control" type="Control" unique_id=258502912 node_paths=PackedStringArray("MainMenuScreen", "CassetteScreen")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yup4i")
+MainMenuScreen = NodePath("MainMenuScreen")
+CassetteScreen = NodePath("CassetteScreen")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=1579503535]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_s7r3b")
+metadata/_edit_lock_ = true
+
+[node name="MainMenuScreen" parent="." unique_id=305483355 instance=ExtResource("2_tj2lh")]
+visible = false
+layout_mode = 1
+
+[node name="CassetteScreen" parent="." unique_id=1798816060 instance=ExtResource("3_tj2lh")]
+visible = false
+layout_mode = 1

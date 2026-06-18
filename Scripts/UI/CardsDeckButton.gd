@@ -17,7 +17,7 @@ func _on_button_down():
 func add_card_on_screen(card):
 	var card_sprite = TextureRect.new()
 	# загрузка текстуры
-	var tex_path = "res://sprites/cards/" + card + ".png"
+	var tex_path = "res://Sprites/cards/" + card.to_lower() + ".png"
 	card_sprite.texture = load(tex_path)
 
 	card_sprite.custom_minimum_size = Vector2(297, 497)

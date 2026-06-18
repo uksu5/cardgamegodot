@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bl5f282wgijor"]
+
+[ext_resource type="Script" uid="uid://dksjfq0yiqpln" path="res://Scripts/ItemsData/ScreenItem.gd" id="1_gy0sv"]
+[ext_resource type="Texture2D" uid="uid://b2fftg5gquhd7" path="res://Sprites/ItemsTextures/BratishkinStitchCharm.png" id="2_o7d6j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7d6j"]
+
+[node name="Area2D" type="PanelContainer" unique_id=589257605 node_paths=PackedStringArray("sprite")]
+z_index = 2
+offset_right = 300.0
+offset_bottom = 300.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o7d6j")
+script = ExtResource("1_gy0sv")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="TextureRect" parent="." unique_id=1329061963]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("2_o7d6j")
+expand_mode = 2

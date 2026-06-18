@@ -42,10 +42,7 @@ var rarity_names: Dictionary = {
 
 
 func start_prize_panel():
-	var dir = DirAccess.open(path)
-	for file in dir.get_files():
-		if file.ends_with(".tres"):
-			items.append(load(path + file))
+	GlobalScripts.load_resources_from_dir(path, items)
 	choose_prize()
 	
 	
@@ -68,7 +65,7 @@ func pick_random_rarity():
 func choose_prize():
 	var prize = pick_random_rarity()
 	draw_prize(prize)
-	add_item_to_inventory(prize.id, 1)
+	add_item_to_inventory(prize.rarity, prize.id, 1)
 
 func draw_prize(item):
 	write_labels(item)
@@ -81,7 +78,7 @@ func write_labels(item):
 	ButtonStringCassette.color = rarity_colors[item.rarity]
 	ButtonStringMenu.color = rarity_colors[item.rarity]
 	if item.rarity != 0:
-		ItemRarity.text.to_upper()
+		ItemRarity.text = ItemRarity.text.to_upper()
 		ItemRarity.add_theme_color_override('font_color', rarity_colors[item.rarity])
 	
 	ItemTexture.texture = item.texture
@@ -91,9 +88,10 @@ func change_box(rarity):
 	BoxNode.texture = load("res://baked_boxes/box_%s.png" % str(rarity))
 	
 		
-func add_item_to_inventory(item, amount):
-	if GameData.inventory.has(item):
-		GameData.inventory[item] += amount
-	else:
-		GameData.inventory[item] = amount
-	SaveScript._save_data()
+func add_item_to_inventory(item_rarity, item, amount):
+	if item_rarity != ItemData.Rarity.GARBAGE:
+		if GameData.inventory.has(item):
+			GameData.inventory[item] += amount
+		else:
+			GameData.inventory[item] = amount
+		SaveScript._save_data()

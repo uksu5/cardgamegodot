@@ -1,18 +1,119 @@
-[gd_scene format=3 uid="uid://bimtympx7onfm"]
+[gd_scene format=3 uid="uid://pnkotf5dq7a7"]
 
-[ext_resource type="Texture2D" uid="uid://btogtijqvoifa" path="res://Sprites/bg/bg_menu.png" id="1_cmhrf"]
+[ext_resource type="Script" uid="uid://82stif85bcqs" path="res://mainmenuscreen_script.gd" id="1_3pujl"]
+[ext_resource type="Texture2D" uid="uid://d1u64i0vidwn2" path="res://Sprites/banners/game_name_banner.png" id="1_cmhrf"]
+[ext_resource type="Texture2D" uid="uid://hmpfoci3joj4" path="res://Sprites/Buttons/button_menu.png" id="2_d2nv2"]
+[ext_resource type="Script" uid="uid://cqff4gos4rr8m" path="res://custom_button_play_script.gd" id="3_igs2m"]
+[ext_resource type="FontFile" uid="uid://brky4iemwvv4f" path="res://dned_f.ttf" id="3_wgsso"]
 
-[node name="Control" type="Control" unique_id=258502912]
+[sub_resource type="Theme" id="Theme_wgsso"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_igs2m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pujl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7uvds"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_at6rn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dihg0"]
+
+[sub_resource type="Theme" id="Theme_igs2m"]
+default_font_size = 100
+
+[node name="Control" type="Control" unique_id=305483355]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3pujl")
 
-[node name="BgTexture" type="TextureRect" parent="." unique_id=1579503535]
+[node name="BezdarnoeOchkoBannerTR" type="TextureRect" parent="." unique_id=1421315223]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1482.0
+offset_bottom = 251.0
 texture = ExtResource("1_cmhrf")
 metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=559759385]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.272
+anchor_right = 0.42100003
+anchor_bottom = 0.93100005
+offset_left = 0.23999977
+offset_top = 0.23999023
+offset_right = -0.32006836
+offset_bottom = 0.5199585
+
+[node name="CustomButton_Play" type="TextureRect" parent="VBoxContainer" unique_id=2054271340]
+layout_mode = 2
+texture = ExtResource("2_d2nv2")
+stretch_mode = 2
+script = ExtResource("3_igs2m")
+
+[node name="Button" type="Button" parent="VBoxContainer/CustomButton_Play" unique_id=261247267]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 18.0
+offset_right = 690.0
+offset_bottom = 184.0
+theme = SubResource("Theme_wgsso")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_igs2m")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3pujl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7uvds")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_at6rn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dihg0")
+
+[node name="ButtonLabel" type="Label" parent="VBoxContainer/CustomButton_Play" unique_id=1704401394]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 44.0
+offset_right = 683.0
+offset_bottom = 154.0
+theme = SubResource("Theme_igs2m")
+theme_override_colors/font_color = Color(1, 0.6431373, 0.25882354, 1)
+theme_override_fonts/font = ExtResource("3_wgsso")
+text = "Играть"
+horizontal_alignment = 1
+
+[node name="CustomButton_Cassette" type="TextureRect" parent="VBoxContainer" unique_id=1010075151]
+layout_mode = 2
+texture = ExtResource("2_d2nv2")
+stretch_mode = 2
+script = ExtResource("3_igs2m")
+
+[node name="Button" type="Button" parent="VBoxContainer/CustomButton_Cassette" unique_id=2041546170]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 18.0
+offset_right = 690.0
+offset_bottom = 184.0
+theme = SubResource("Theme_wgsso")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_igs2m")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3pujl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7uvds")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_at6rn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dihg0")
+
+[node name="ButtonLabel" type="Label" parent="VBoxContainer/CustomButton_Cassette" unique_id=1851635747]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 44.0
+offset_right = 683.0
+offset_bottom = 154.0
+theme = SubResource("Theme_igs2m")
+theme_override_colors/font_color = Color(1, 0.6431373, 0.25882354, 1)
+theme_override_fonts/font = ExtResource("3_wgsso")
+text = "Шкатулка"
+horizontal_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/CustomButton_Play/Button" to="." method="_on_button_main_menu_play_down"]
+[connection signal="mouse_entered" from="VBoxContainer/CustomButton_Play/Button" to="VBoxContainer/CustomButton_Play" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/CustomButton_Play/Button" to="VBoxContainer/CustomButton_Play" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="VBoxContainer/CustomButton_Cassette/Button" to="." method="_on_button_cassette_menu_down"]
+[connection signal="mouse_entered" from="VBoxContainer/CustomButton_Cassette/Button" to="VBoxContainer/CustomButton_Cassette" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/CustomButton_Cassette/Button" to="VBoxContainer/CustomButton_Cassette" method="_on_button_mouse_exited"]

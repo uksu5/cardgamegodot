@@ -5,7 +5,7 @@ extends Control
 func add_enemy_card_on_screen():
 	var local_drop_y = drop_y
 	var card = TextureRect.new()
-	card.texture = load("res://sprites/cards/card_back.png")
+	card.texture = load("res://Sprites/cards/card_back.png")
 	
 	var card_size = Vector2(60, 90)
 	card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

@@ -10,5 +10,6 @@ id = "T2X2LuckyCharm"
 name = "T2X2 и Лаки"
 author = "чимичанга"
 rarity = 1
+description = "очень большой по габаритам дядя с собакой в виде брелока"
 texture = ExtResource("3_l2int")
 metadata/_custom_type_script = "uid://cljonv8bskj1d"
