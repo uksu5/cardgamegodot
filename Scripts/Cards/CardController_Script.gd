@@ -6,21 +6,23 @@ var cards_rate = BaseCards.CARDS
 var cards_suit = BaseCards.CARDS_SUITS
 var cards_deck = BaseCards.CARDS_DECK52.duplicate()
 var end_screen = preload("res://EndScreen.tscn").instantiate()
-@onready var logging_box = $"../Log label"
-@onready var hbox_container = $"../CardsContainer/HBoxContainer"
-@onready var give_card_button_script = $"../Deck Buttons/CardsDeckButton"
-@onready var enemy_cards_container = $"../EnemyCardsContainer"
-@onready var turn_banner = $"../Turn Banner"
+@export var logging_box: RichTextLabel
+@export var hbox_container: HBoxContainer
+@export var give_card_button_script: TextureButton
+@export var enemy_cards_container: Control
+@export var turn_banner: Control
+@export var PlayerCardsContainer: HBoxContainer
+@export var DeckButton: TextureButton
 
-
+var max_points = 21
 
 var game_result := Results.UNDECIDED
 
 var enemy_cards:= []
 var enemy_score := 0
 
-var player_score = 0
 var player_cards = []
+var player_score = 0
 
 enum Actions {HIT, STAND, UNDECIDED}
 enum Turn {PLAYER, ENEMY}
@@ -33,14 +35,21 @@ var last_player_action = Actions.UNDECIDED
 var last_enemy_action = Actions.UNDECIDED
 	
 func _ready():
+	GlobalScripts.CardController = self
 	GlobalScripts.color_rect_fadeout()
+	CardsUiController.hbox_container = PlayerCardsContainer
+	CardsUiController.Deck = DeckButton
+	CardsUiController.EnemyCardsContainer = enemy_cards_container
 
 	game_result = Results.UNDECIDED
-	cards_deck.shuffle()
 	cards_deck.shuffle()
 	choose_turn()
 	SaveScript._load_data()
 	print(GameData.inventory)
+	
+	PlayerCardsContainer.add_child(BaseCards.CUSTOMCARD_X2.instantiate())
+	PlayerCardsContainer.add_child(BaseCards.CUSTOMCARD_LT.instantiate())
+	PlayerCardsContainer.add_child(BaseCards.CUSTOMCARD_M.instantiate())
 func choose_turn():
 	# Случайный выбор хода(игрок/противник)
 	turn = [Turn.PLAYER, Turn.ENEMY].pick_random()
@@ -53,9 +62,6 @@ func choose_turn():
 
 func enemy_turn():
 	state = GameState.ENEMY_TURN
-	#if enemy_cards.is_empty():
-	#	take_card_enemy()
-	#	return
 	logging_box.add_log("Ход врага")
 	await get_tree().create_timer(randf_range(1.0, 5.0)).timeout
 	#запуск монте-карло
@@ -93,7 +99,7 @@ func simulate_game(starting_action) -> bool:
 		if sim_deck.is_empty(): return false
 		sim_enemy_cards.append(sim_deck.pop_back())
 		sim_enemy_score = get_score(sim_enemy_cards)
-	if sim_enemy_score > 21: 
+	if sim_enemy_score > max_points: 
 		return false # Бот сразу проиграл от перебора
 		
 	# Дальнейшие действия бота 
@@ -102,7 +108,7 @@ func simulate_game(starting_action) -> bool:
 			if sim_deck.is_empty(): break
 			sim_enemy_cards.append(sim_deck.pop_back())
 			sim_enemy_score = get_score(sim_enemy_cards)
-			if sim_enemy_score > 21: 
+			if sim_enemy_score > max_points: 
 				return false
 				
 	# Действия игрока
@@ -111,17 +117,17 @@ func simulate_game(starting_action) -> bool:
 			if sim_deck.is_empty(): break
 			sim_player_cards.append(sim_deck.pop_back())
 			sim_player_score = get_score(sim_player_cards)
-			if sim_player_score > 21: 
+			if sim_player_score > max_points: 
 				return true # Игрок перебрал, бот победил
 				
-	if sim_player_score > 21: return true
-	if sim_enemy_score > 21: return false
+	if sim_player_score > max_points: return true
+	if sim_enemy_score > max_points: return false
 	
 	return sim_enemy_score >= sim_player_score
 			
 func player_turn():
 	state = GameState.PLAYER_TURN
-	logging_box.add_log("Ход игрока")
+	
 	
 func get_score(cards) -> int:
 	var score := 0
@@ -136,7 +142,7 @@ func get_score(cards) -> int:
 func take_card_enemy():
 	enemy_cards.append(cards_deck.pop_back())
 	enemy_score = get_score(enemy_cards)
-	logging_box.add_log("Карты врага: " + str(enemy_cards) + " | Счёт врага " + str(enemy_score))
+	logging_box.on_enemy_take_card_log(str(enemy_cards), str(enemy_score))
 	add_enemy_card_on_screen()
 	last_enemy_action = Actions.HIT
 	state = GameState.PLAYER_TURN
@@ -152,8 +158,7 @@ func take_card_player():
 		var card = (cards_deck.pop_back())
 		player_cards.append(card)
 		player_score = get_score(player_cards)
-		logging_box.add_log("Счёт: " + str(player_score) + " | Карты игрока: " + str(player_cards))
-		logging_box.add_log("карт в колоде: " + str(cards_deck))
+		logging_box.on_player_take_card_log(str(player_cards), str(player_score))
 		add_card_on_screen(card)
 		last_player_action = Actions.HIT
 		state = GameState.ENEMY_TURN
@@ -168,29 +173,30 @@ func stand_player():
 	deferred_next_step()
 
 func add_card_on_screen(card):
-	give_card_button_script.add_card_on_screen(card)
+	CardsUiController.add_player_card_on_screen(card)
 
 func add_enemy_card_on_screen():
-	enemy_cards_container.add_enemy_card_on_screen()
+	CardsUiController.add_enemy_card_on_screen()
 
 func check_result():
 	if game_result == Results.UNDECIDED:
-		if player_score == 21 and enemy_score != 21:
+		if player_score == max_points and enemy_score != max_points:
 			game_result = Results.WIN
 		elif player_score == enemy_score and last_enemy_action == Actions.STAND and last_player_action == Actions.STAND:
 			game_result = Results.DRAW
-		elif enemy_score == 21 and player_score != 21:
+		elif enemy_score == max_points and player_score != max_points:
 			game_result = Results.LOSS
-		elif player_score > 21 and enemy_score < 21:
+		elif player_score > max_points and enemy_score < max_points:
 			game_result = Results.LOSS
-		elif enemy_score > 21 and player_score < 21:
+		elif enemy_score > max_points and player_score < max_points:
 			game_result = Results.WIN
 		elif last_enemy_action == Actions.STAND and last_player_action == Actions.STAND:
-			if abs(player_score - 21) < abs(enemy_score - 21):
+			if abs(player_score - max_points) < abs(enemy_score - max_points):
 				game_result = Results.WIN
 			else:
 				game_result = Results.LOSS
 func next_step():
+	logging_box.cards_in_deck(str(cards_deck))
 	match state:
 		GameState.PLAYER_TURN:
 			turn_banner.fade_in_out("player")

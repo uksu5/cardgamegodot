@@ -2,6 +2,8 @@ extends Control
 
 @export var box: TextureRect
 
+
+
 var rarity_colors = {
 	ItemData.Rarity.GARBAGE: Color(0.451, 0.451, 0.451, 1.0),
 	ItemData.Rarity.COMMON: Color(0.961, 0.941, 0.882, 1.0),
@@ -15,7 +17,7 @@ func _ready():
 	await get_tree().process_frame
 	await bake_all()
 	get_tree().quit()
-
+	
 
 func bake_all():
 	DirAccess.make_dir_recursive_absolute("res://baked_boxes")
@@ -93,3 +95,6 @@ func bake_one(rarity):
 	# ----------------------------
 	vp.queue_free()
 	vp = null
+	
+func change_pivot_offset():
+	pass

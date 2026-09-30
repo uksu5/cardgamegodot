@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://dk7lc805urhjp" path="res://Sprites/Buttons/Stand_Button.PNG" id="11_42l1d"]
 [ext_resource type="Script" uid="uid://40vfowku2xup" path="res://Scripts/UI/LogLabel_Script.gd" id="11_qwutr"]
 [ext_resource type="Script" uid="uid://bh1767cbwd4pn" path="res://Scripts/stand_button_script.gd" id="12_2jcla"]
-[ext_resource type="Script" uid="uid://imnpr0epogpf" path="res://Scripts/Cards/EnemyCardsController_Script.gd" id="13_mo76n"]
 [ext_resource type="Script" uid="uid://chvsmephhss8r" path="res://Scripts/DeckButtonsScript.gd" id="13_u0ygc"]
 [ext_resource type="Script" uid="uid://de854o1rr2xnr" path="res://Scripts/turn_banner_script.gd" id="16_m35m6"]
 
@@ -30,7 +29,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_nfk4m")
 }],
-"loop": false,
+"loop": 0,
 "name": &"blinking",
 "speed": 5.0
 }, {
@@ -38,10 +37,54 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_8mm7a")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle",
 "speed": 5.0
 }]
+
+[sub_resource type="GDScript" id="GDScript_m35m6"]
+script/source = "extends Control
+@export var angle_step := 6.0
+@export var spacing_x := 9.0
+@export	var drop_y := 3.0
+func add_enemy_card_on_screen():
+	var local_drop_y = drop_y
+	var card = TextureRect.new()
+	card.texture = load(\"res://Sprites/cards/card_back.png\")
+	
+	var card_size = Vector2(60, 90)
+	card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	card.custom_minimum_size = card_size
+	card.size = card_size
+	
+	card.pivot_offset = Vector2(card_size.x/2.0, card_size.y)
+	var index = get_child_count()
+	# возведение количества карт index в степень 1.3 для нелинейного роста множителя угла
+	var angle_step_multiplier = 1.0 + pow(index, 1.3) * 0.03
+	# если враг берет первую карту - вращение не применяется, карта ставится, а функция прерывается
+	if index == 0:
+		card.position = Vector2(0.0, 0.0) - card.pivot_offset
+		add_child(card)
+		return
+	# 
+	var step = ceil(index / 2.0)
+	var multiplier := 0.0
+	if index % 2 != 0: 
+		multiplier = step
+	else:              
+		multiplier = -step
+		local_drop_y = -drop_y
+	card.rotation_degrees = multiplier*angle_step*angle_step_multiplier
+	
+	var target_x = multiplier*spacing_x-angle_step_multiplier
+	var target_y = multiplier*local_drop_y
+	
+	card.position = Vector2(target_x, target_y) - card.pivot_offset
+	
+	card.z_index = 0
+	
+	add_child(card)
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_m35m6"]
 font_size = 33
@@ -85,13 +128,20 @@ scroll_hint_mode = 1
 tile_scroll_hint = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CardsContainer" unique_id=1304189740]
-clip_contents = true
 custom_minimum_size = Vector2(199, 300)
+clip_contents = true
 layout_mode = 2
 accessibility_name = "HBoxContainer"
 
-[node name="CardController" type="Node" parent="." unique_id=1321705652]
+[node name="CardController" type="Node" parent="." unique_id=1321705652 node_paths=PackedStringArray("logging_box", "hbox_container", "give_card_button_script", "enemy_cards_container", "turn_banner", "PlayerCardsContainer", "DeckButton")]
 script = ExtResource("7_671wp")
+logging_box = NodePath("../Log label")
+hbox_container = NodePath("../CardsContainer/HBoxContainer")
+give_card_button_script = NodePath("../Deck Buttons/CardsDeckButton")
+enemy_cards_container = NodePath("../EnemyCardsContainer")
+turn_banner = NodePath("../Turn Banner")
+PlayerCardsContainer = NodePath("../CardsContainer/HBoxContainer")
+DeckButton = NodePath("../Deck Buttons/CardsDeckButton")
 
 [node name="EnemyHand" type="Sprite2D" parent="." unique_id=653452926]
 z_index = 1
@@ -117,8 +167,7 @@ offset_right = 1336.0
 offset_bottom = 570.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("13_mo76n")
-spacing_x = 9.0
+script = SubResource("GDScript_m35m6")
 
 [node name="Turn Banner" type="Control" parent="." unique_id=53663337]
 layout_mode = 3

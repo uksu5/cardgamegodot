@@ -24,3 +24,8 @@ const CARDS_DECK52 = [
 "h6","h7","h8","h9","h10","hj","hq","hk","ha",
 "s6","s7","s8","s9","s10","sj","sq","sk","sa"
 ];
+
+const CUSTOMCARD_X2 = preload("res://Scripts/CustomCards/CustomCardX2.tscn")
+const CUSTOMCARD_LT = preload("res://Scripts/CustomCards/CustomCardLT.tscn")
+const CUSTOMCARD_M = preload("res://Scripts/CustomCards/CustomCardM.tscn")
+const CARD_TEXURE_SIZE: Vector2 = Vector2(297, 497)

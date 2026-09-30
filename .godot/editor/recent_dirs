@@ -1,10 +1,8 @@
-C:/Users/Имя/Documents/card-game/build/
-res://Scripts/Items/Garbage/
-res://Scripts/
 res://
-res://Scripts/ItemsData/
-res://Scripts/UI/
 res://Scripts/Cards/
+res://Scripts/UI/
+res://Scripts/
+res://Scripts/ItemsData/
 res://Scripts/Items/
 res://Sprites/ItemsTextures/
 res://shaders/

@@ -12,3 +12,4 @@ func _ready() -> void:
 			GlobalScripts.show_with_fadein(CassetteScreen, 1.0)
 		GlobalScripts.MenuScreens.MENU:
 			GlobalScripts.show_with_fadein(MainMenuScreen, 1.0)
+			

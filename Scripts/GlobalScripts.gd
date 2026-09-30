@@ -2,7 +2,11 @@ extends Node
 
 enum MenuScreens {CASSETTE, MENU}
 
+var info_banner_path: String = "res://InfoBanner.tscn"
 var choosed_menu_screen := MenuScreens.MENU
+const CustomCardHoldTime: float = 1.0
+
+var CardController: Node
 
 func show_with_fadein(obj: CanvasItem, time: float):
 	var tween = create_tween()
@@ -16,8 +20,7 @@ func hide_with_fadeout(obj: CanvasItem, time: float):
 	tween.tween_property(obj, "modulate:a", 0.0, time)
 	await tween.finished
 	obj.visible = false
-	
-	
+		
 func create_black_color_rect():
 	var color_rect = ColorRect.new()
 	color_rect.color = Color()
@@ -60,3 +63,15 @@ func load_resources_from_dir(folder_path: String, target_array: Array) -> void:
 	# Проверка на пустоту
 	if target_array.is_empty():
 		print("массив пуст, путь", folder_path)
+
+func show_info(where: Node, headline: String, content: String):
+	var info_banner = load(info_banner_path)
+	if info_banner:
+		info_banner = info_banner.instantiate()
+		where.add_child(info_banner)
+		show_with_fadein(info_banner, 0.5)
+		info_banner.CardNameLabel.text = headline
+		info_banner.CardContentLabel.text = content
+		await get_tree().create_timer(2.5).timeout
+		await hide_with_fadeout(info_banner, 0.5)
+		info_banner.queue_free()

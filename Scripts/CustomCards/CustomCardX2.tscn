@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cuexsgyccygkv"]
+
+[ext_resource type="Texture2D" uid="uid://cs5y1omga064i" path="res://Sprites/cards/sj.png" id="1_keqfv"]
+[ext_resource type="Script" uid="uid://brmyatq71ojbw" path="res://Scripts/CustomCards/CustomCardX2_script.gd" id="2_keqfv"]
+
+[node name="CustomCard" type="TextureRect" unique_id=2063252873 node_paths=PackedStringArray("button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_keqfv")
+script = ExtResource("2_keqfv")
+button = NodePath("CustomCardButton")
+
+[node name="CustomCardButton" type="TextureButton" parent="." unique_id=2049561296]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 55.0
+offset_right = 366.0
+offset_bottom = 437.0
+
+[connection signal="button_down" from="CustomCardButton" to="." method="_on_button_down"]
+[connection signal="button_up" from="CustomCardButton" to="." method="_on_button_up"]
